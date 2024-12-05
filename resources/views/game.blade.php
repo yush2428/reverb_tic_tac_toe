@@ -7,7 +7,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
 </head>
-<body class="min-h-screen flex flex-col justify-center items-center bg-gray-100 font-sans">
+<body class="bg-[url('/public/assets/beams.jpg')] min-h-screen flex flex-col justify-center items-center bg-gray-100 font-sans">
     @livewire('game.tic-tac-toe')
 
     @livewireScripts
