@@ -17,6 +17,8 @@
                             class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
                             placeholder="Enter Email to invite" />
                     </div>
+                    {{-- <input type="hidden" name="game_id" value="{{ $game->id }}"> --}}
+                    <input type="hidden" name="invite_link" value="">
                 </div>
                 <div class="p-6 pt-0 flex justify-end">
                     <button type="submit"
@@ -54,7 +56,7 @@
                     email: email
                 },
                 success: function(data) {
-                    alert('Invitation sent successfully!');
+                    console.log('Invitation sent successfully!');
                     document.getElementById('invite-email').value = '';
                 },
                 error: function(error) {

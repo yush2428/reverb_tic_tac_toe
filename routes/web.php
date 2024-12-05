@@ -16,6 +16,11 @@ Route::get('/game', function () {
     return view('game');
 })->middleware(['auth', 'verified'])->name('game');
 
+// Route to generate invite link
+Route::post('/game/generate-link', [GameInviteController::class, 'create'])
+    ->middleware(['auth', 'verified'])
+    ->name('game.generate-link');
+
 Route::post('/game/invite', [GameInviteController::class, 'sendInvite'])
     ->middleware(['auth', 'verified'])
     ->name('game.invite');
