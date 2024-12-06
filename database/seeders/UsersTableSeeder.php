@@ -21,25 +21,29 @@ class UsersTableSeeder extends Seeder
 
         $users = [
             [
-                'name' => 'User One',
+                'full_name' => 'User One',
+                'username' => 'user_one',
                 'email' => 'user@one.com',
                 'password' => Hash::make('Password@1234'),
                 'status' => ActivityStatusEnums::OFFLINE,
             ],
             [
-                'name' => 'User Two',
+                'full_name' => 'User Two',
+                'username' => 'user_two',
                 'email' => 'user@two.com',
                 'password' => Hash::make('Password@1234'),
                 'status' => ActivityStatusEnums::OFFLINE,
             ],
             [
-                'name' => 'User Three',
+                'full_name' => 'User Three',
+                'username' => 'user_three',
                 'email' => 'user@three.com',
                 'password' => Hash::make('Password@1234'),
                 'status' => ActivityStatusEnums::OFFLINE,
             ],
             [
-                'name' => 'User Four',
+                'full_name' => 'User Four',
+                'username' => 'user_four',
                 'email' => 'user@four.com',
                 'password' => Hash::make('Password@1234'),
                 'status' => ActivityStatusEnums::OFFLINE,

@@ -16,9 +16,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->nullable();
             $table->foreignId('opponent_id')->constrained('users')->onDelete('cascade')->nullable();
+            $table->string('match_id')->unique();
             $table->integer('user_score')->nullable();
             $table->integer('opponent_score')->nullable();
-            $table->string('match_status')->default(MatchEnums::PENDING);
+            $table->string('match_status')->default(MatchEnums::PENDING)->comment('Game Result: [pending, won, lost, draw]');
             $table->timestamps();
         });
     }
