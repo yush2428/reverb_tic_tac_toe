@@ -92,7 +92,7 @@ php artisan migrate
 ### 8. Set Up Reverb (Real-Time Communication)
 
 ```bash
-php artisan reverb:install
+php artisan install:broadcasting
 php artisan reverb:start
 ```
 
@@ -149,6 +149,6 @@ Distributed under the MIT License. See `LICENSE` for more information. -->
 
 ## Contact
 
-Your Name - [Yushabh Dhande](https://dub.sh/yushabh-dhande)
+Developed by: [Yushabh Dhande](https://dub.sh/yushabh-dhande)
 
 Project Link: [https://github.com/yush2428/reverb_tic_tac_toe](https://github.com/yush2428/reverb_tic_tac_toe)
