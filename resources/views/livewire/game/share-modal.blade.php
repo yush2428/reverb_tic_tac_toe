@@ -18,7 +18,7 @@
                             placeholder="Enter Email to invite" />
                     </div>
                     {{-- <input type="hidden" name="game_id" value="{{ $game->id }}"> --}}
-                    <input type="hidden" name="invite_link" value="">
+                    <input type="hidden" name="invite_link" id="invite_link" value>
                 </div>
                 <div class="p-6 pt-0 flex justify-end">
                     <button type="submit"
@@ -53,7 +53,8 @@
                 type: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
-                    email: email
+                    email: email,
+                    inviteLink: $('#invite_link').val()
                 },
                 success: function(data) {
                     console.log('Invitation sent successfully!');
@@ -66,6 +67,7 @@
             });
         });
 
+        // function is not working
         copyLinkBtn.addEventListener('click', function() {
             const gameUrl = window.location.href;
             

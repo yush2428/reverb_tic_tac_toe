@@ -26,19 +26,21 @@ class GameInviteController extends Controller
 
     public function sendInvite(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'email' => 'required|email',
-            'game_id' => 'nullable',
+            'inviteLink' => 'required',
         ]);
 
-        $gameId = $request->game_id ?? null;
+        // $gameId = $request->game_id ?? null;
         $email = $request->email;
-        $link = url('/game/' . $gameId);
+        $link = $request->inviteLink;
 
         try {
             Mail::to($email)->send(new SendInviteLink($email, $link));
             return response()->json([
                 'message' => 'Invitation sent successfully',
+                'link' => $link,
                 'status' => 'success'
             ], 200);
         } catch (\Exception $e) {
@@ -53,7 +55,7 @@ class GameInviteController extends Controller
     {
         $userName = str_replace(' ', '', Auth::user()->name);
         $gId = Str::random(6);
-        $gameId = $userName . '/'. $gId;
+        $gameId = $userName . '-'. $gId;
         return $gameId;
     }
 }

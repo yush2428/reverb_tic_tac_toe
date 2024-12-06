@@ -12,7 +12,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/game', function () {
+Route::get('/game/{gameId}', function () {
     return view('game');
 })->middleware(['auth', 'verified'])->name('game');
 
