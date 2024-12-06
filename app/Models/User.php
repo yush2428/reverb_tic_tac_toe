@@ -6,43 +6,39 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Enums\ActivityStatusEnums;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name', 'email', 'password', 'status'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password', 'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function GameMatches()
+    {
+        return $this->hasMany(GameMatch::class);
+    }
+
+    // help: Scopes for future use
+    public function scopeMyWonMatches($query) { return $this->GameMatches()->won(); }
+    public function scopeMyLostMatches($query) { return $this->GameMatches()->lost(); }
+
+    public function scopeGetOnlineUsers($query)
+    {
+        return $query->where('status', ActivityStatusEnums::ONLINE);
     }
 }
