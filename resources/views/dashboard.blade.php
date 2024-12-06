@@ -30,10 +30,11 @@
 </x-app-layout>
 
 <script src="https://unpkg.com/@material-tailwind/html@latest/scripts/dialog.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{ asset('js/soft-ui-dashboard.js') }}"></script>
 <script>
     // this function will generate game id and invite link
     function generateInvitation() {
-        // alert(24);
         $.ajax({
             url: "{{ route('game.generate-link') }}",
             type: 'POST',
@@ -41,9 +42,12 @@
                 _token: '{{ csrf_token() }}',
             },
             success: function(data) {
-                console.log(data);
-                console.log(data.game_id);
-                console.log(data.link);
+                if (data.status == 'success') {
+                    console.log('link generated successfully');
+                    $('#invite_link').val(data.link);
+                } else {
+                    console.log('failed to generate link');
+                }
             },
             error: function(error) {
                 console.error('Error:', error);

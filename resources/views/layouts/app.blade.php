@@ -36,6 +36,9 @@
                 {{ $slot }}
             </main>
         </div>
+        <!-- SweetAlert2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="{{ asset('js/soft-ui-dashboard.js') }}"></script>
         @stack('extra-js')
     </body>
 </html>
