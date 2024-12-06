@@ -16,12 +16,13 @@ class GameInviteController extends Controller
         $gameId = $this->generateGameId();
         $link = url('/game/' . $gameId);
 
-        return response()->json([
-            'game_id' => $gameId,
-            'link' => $link,
-            'message' => 'Game invite link generated successfully',
-            'status' => 'success'
-        ], 200);
+        
+        // return response()->json([
+        //     'game_id' => $gameId,
+        //     'link' => $link,
+        //     'message' => 'Game invite link generated successfully',
+        //     'status' => 'success'
+        // ], 200);
     }
 
     public function sendInvite(Request $request)
@@ -53,8 +54,8 @@ class GameInviteController extends Controller
 
     private function generateGameId()
     {
-        $userName = str_replace(' ', '', Auth::user()->name);
-        $gId = Str::random(6);
+        $userName = Auth::user()->username;
+        $gId = Str::random(8);
         $gameId = $userName . '-'. $gId;
         return $gameId;
     }

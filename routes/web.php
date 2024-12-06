@@ -12,12 +12,12 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/game/{gameId}', function () {
+Route::get('/game/{gameId?}', function () {
     return view('game');
 })->middleware(['auth', 'verified'])->name('game');
 
 // Route to generate invite link
-Route::post('/game/generate-link', [GameInviteController::class, 'create'])
+Route::get('/game/generate-link', [GameInviteController::class, 'create'])
     ->middleware(['auth', 'verified'])
     ->name('game.generate-link');
 
