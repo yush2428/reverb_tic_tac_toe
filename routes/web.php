@@ -12,18 +12,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/game/{gameId?}', function () {
-    return view('game');
-})->middleware(['auth', 'verified'])->name('game');
-
-// Route to generate invite link
-Route::get('/game/generate-link', [GameInviteController::class, 'create'])
-    ->middleware(['auth', 'verified'])
-    ->name('game.generate-link');
-
-Route::post('/game/invite', [GameInviteController::class, 'sendInvite'])
-    ->middleware(['auth', 'verified'])
-    ->name('game.invite');
+Route::middleware(['auth', 'verified'])->group(function (){
+    Route::get('/game/{gameId}', [GameInviteController::class, 'show'])->name('game');
+    Route::get('/generate-game-link', [GameInviteController::class, 'create'])->name('generate-link');
+    Route::post('/game/invite', [GameInviteController::class, 'sendInvite'])->name('game.invite');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
