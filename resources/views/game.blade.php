@@ -9,7 +9,7 @@
     @livewireStyles
 </head>
 <body class="bg-[url('/public/assets/beams.jpg')] min-h-screen flex flex-col justify-center items-center bg-gray-100 font-sans">
-    @livewire('game.tic-tac-toe')
+    <livewire:game.tic-tac-toe :gameId="$gameId" />
     <div class="flex justify-end">
         <div class="py-6 text-gray-900 dark:text-gray-100">
             <button data-dialog-target="share-invite-dialog" id="generate_link"

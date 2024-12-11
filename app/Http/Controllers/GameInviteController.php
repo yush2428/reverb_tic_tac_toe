@@ -35,7 +35,7 @@ class GameInviteController extends Controller
     public function show($gameId){
         $url = GameMatch::select('link')->whereMatchId($gameId)->first();
         $link = $url->link;
-        return view('game', compact('link'));
+        return view('game', compact('link', 'gameId'));
     }
     public function sendInvite(Request $request)
     {

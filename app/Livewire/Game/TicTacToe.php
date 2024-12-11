@@ -10,7 +10,7 @@ class TicTacToe extends Component
 {
     public $board = ['', '', '', '', '', '', '', '', ''];
     public $currentPlayer = 'X';
-    public $gameId = 1; // This should be dynamic based on the game session
+    public $gameId;
     public $winner = null;
     public $gameOver = false;
     public $playerX;
@@ -27,9 +27,12 @@ class TicTacToe extends Component
         [2, 4, 6]  // diagonal top-right to bottom-left
     ];
 
-    public function mount()
+    public function mount($gameId)
     {
-        $this->playerX = auth()->user()->name;
+
+        \Log::info('Mount: ', [$gameId]);
+        $this->gameId = $gameId;
+        $this->playerX = auth()->user()->username;
         $this->playerO = null;
     }
 
@@ -39,7 +42,7 @@ class TicTacToe extends Component
             return;
         }
 
-        $currentUserName = auth()->user()->name;
+        $currentUserName = auth()->user()->username;
 
         // If playerO is not set and current user is not playerX, set them as playerO
         if (!$this->playerO && $currentUserName !== $this->playerX) {
@@ -54,7 +57,7 @@ class TicTacToe extends Component
         }
 
         $this->board[$index] = $this->currentPlayer;
-        
+
         broadcast(new InputEntered([
             'index' => $index,
             'player' => $this->currentPlayer,
@@ -113,8 +116,8 @@ class TicTacToe extends Component
         $this->playerO = null;
     }
 
-    #[On('echo-private:game-room.1,InputEntered')]
-    public function getSelectedValue($data)
+    #[On('echo-private:game-room.{gameId},InputEntered')]
+    public function handleInput($data)
     {
         if (isset($data['index']) && isset($data['player'])) {
             $this->board[$data['index']] = $data['player'];
