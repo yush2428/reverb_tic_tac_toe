@@ -18,10 +18,10 @@
                             placeholder="Enter Email to invite" />
                     </div>
                     {{-- <input type="hidden" name="game_id" value="{{ $game->id }}"> --}}
-                    <input type="hidden" name="invite_link" id="invite_link" value>
+                    <input type="hidden" name="invite_link" id="invite_link" value="{{ $link }}">
                 </div>
                 <div class="p-6 pt-0 flex justify-end">
-                    <button type="submit"
+                    <button type="submit" id="send_invite"
                         class="w-5/6 rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
                         Send Invite
                     </button>
@@ -43,11 +43,17 @@
     document.addEventListener('DOMContentLoaded', function() {
         const inviteForm = document.getElementById('inviteForm');
         const copyLinkBtn = document.getElementById('copyLinkBtn');
-        
+        const sendBtn = document.getElementById('send_invite');
+
+        // Change button text on click
+        sendBtn.addEventListener('click', function() {
+            sendBtn.textContent = 'Sending...';
+        });
+
         inviteForm.addEventListener('submit', function(e) {
             e.preventDefault();
             const email = document.getElementById('invite-email').value;
-            
+
             $.ajax({
                 url: '{{ route("game.invite") }}',
                 type: 'POST',
@@ -113,7 +119,7 @@
         // function is not working
         copyLinkBtn.addEventListener('click', function() {
             const gameUrl = window.location.href;
-            
+
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(gameUrl).then(() => {
                     alert('Game link copied to clipboard!');
