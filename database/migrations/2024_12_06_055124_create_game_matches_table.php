@@ -15,8 +15,10 @@ return new class extends Migration
         Schema::create('game_matches', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->nullable();
-            $table->foreignId('opponent_id')->constrained('users')->onDelete('cascade')->nullable();
+            // $table->foreignId('opponent_id')->constrained('users')->onDelete('cascade')->nullable();
+            $table->integer('opponent_id')->nullable();
             $table->string('match_id')->unique();
+            $table->string('link')->unique()->nullable();
             $table->integer('user_score')->nullable();
             $table->integer('opponent_score')->nullable();
             $table->string('match_status')->default(MatchEnums::PENDING)->comment('Game Result: [pending, won, lost, draw]');

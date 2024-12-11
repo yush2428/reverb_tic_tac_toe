@@ -8,7 +8,7 @@ use App\Enums\MatchEnums;
 class GameMatch extends Model
 {
     protected $fillable = [
-        'user_id', 'opponent_id', 'match_id', 'user_score', 'opponent_score', 'match_status',
+        'user_id', 'opponent_id', 'match_id', 'link', 'user_score', 'opponent_score', 'match_status',
     ];
 
     public function user()
