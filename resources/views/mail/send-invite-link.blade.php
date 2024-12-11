@@ -1,7 +1,7 @@
 <x-mail::message>
 # Game Invitation
 ## Hello, {{ $email }}
-{{ Auth::user()->name }} has invited you to join the Game.
+{{ Auth::user()->username }} has invited you to join the Game.
 Please click below button to join.
 
 <x-mail::button :url="$link">
